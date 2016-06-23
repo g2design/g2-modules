@@ -1,0 +1,83 @@
+<div class="navigation-edit-{{ params.page_identity }} toggle container panel">
+	<div class="grad"></div>
+	<h4>Edit Navigation</h4>
+	<form action="crud/page-crud" method="POST">
+		<input type="hidden" name="identity" value="{{ params.page_identity }}">
+		<div class="form-group">
+			<div class="nav-items sortable">
+				{% for nav in params.navitems %}
+					<div>
+						<input placeholder="Label" type="text" name="label" value="{{ nav.label }}">
+						<input placeholder="Href" type="text" name="href" value="{{ nav.href }}">
+						<button class="remove">X</button>
+					</div>
+				{% endfor %}
+			</div>
+			<button class="add-item" data-target='.sortable div'>Add Another Item</button>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-success save-nav">
+				Save Details
+			</button>
+			<button class="btn btn-warning btn-cancel" type="reset">Cancel</button>
+		</div>
+	</form>
+</div>
+
+<script>
+	$(function () {
+		$(".sortable").sortable();
+		
+		$('button.add-item').click(function(e){
+			e.preventDefault();
+			var target = $(this).data('target');
+			var item =	$(target).first().clone();
+			item.find('input').val('');
+			$(target).parent().append(item);
+		});
+		
+		$('button.remove').click(function(e){
+			e.preventDefault();
+			var item = $(this).parent();
+			
+			//check if there is atleast one item
+			if(item.parent().children().size() > 1){
+				item.remove();
+			}
+		});
+		
+		//Save Function
+		$('.save-nav').click(function(e){
+			e.preventDefault();
+			var id = $(this).parents('form').find('input[name="identity"]').val();
+			
+			//Build the nav items array
+			items = [
+				
+			];
+			
+			$(this).parents('form').find('.nav-items div').each(function(){
+				var inner = {
+					'label' : $(this).find('input[name="label"]').val(),
+					'href' : $(this).find('input[name="href"]').val(),
+					'order' : $(this).index()
+				};
+				items.push(inner);
+			});
+			
+			console.log(items);
+			
+			$.post('ajax/nav-save',{'identity': id,'items': items},function(){
+				
+				location.reload();
+			});
+		});
+	});
+</script>
+<style rel="stylesheet/less" type="text/css">
+	.nav-items div {
+		background: white;
+		padding: 10px;
+		margin-bottom: 5px;
+	}
+</style>

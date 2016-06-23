@@ -1,0 +1,68 @@
+<div class="col-md-12">
+	<div class=" panel-default widget-support-tickets" id="dashboard-support-tickets">
+		<div class="panel-heading">
+			<span class="panel-title"><i class="panel-title-icon fa fa-envelope"></i>Change Log</span>
+			<div class="panel-heading-controls">
+				<div class="panel-heading-text">{#<a href="#">15 new tickets</a>#}</div>
+			</div>
+		</div> <!-- / .panel-heading -->
+		<div class="panel-body ">
+			<!-- Panel padding, without vertical padding -->
+			<div class="table-primary">
+				<div class="table-header clearfix">
+					<div class="DT-lf-right">
+						<form action="" class="form-inline">
+							<div class="DT-per-page">
+								<div class="dataTables_length" id="jq-datatables-example_length">
+									<select name="entity" id=""class="form-control input-sm">
+										<option value="">Entity</option>
+										{% for entity in entities %}
+										<option value="{{ entity }}" {%if (set_entity is defined) and set_entity == entity %} selected = 'selected' {% endif %} >{{ entity }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="DT-search">
+								<div id="jq-datatables-example_filter" class="dataTables_filter">
+									<button type="submit" class="btn btn-default">Filter</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Functions</th>
+							<th>Audit Message:</th>
+							<th>Change Issued By:</th>
+							<th>Date Logged</th>
+						</tr>
+					</thead>
+					<tbody>
+							{% for entity, audits in sorted %}
+						<tr>
+							<th colspan="4" class="text-center">{{entity | default('No entity Defined')}}</th>
+						</tr>
+							{% for audit in audits %}
+						<tr>
+							<td><a href="{{ constant('PACKAGE_URL') }}changes/{{audit.id}}" >View Changes</a></td>
+							<td>{{ audit.message }}</td>
+							<td>{{ audit.user.name }}</td>
+							<td>{{ audit.date_logged }}</td>
+						</tr>
+							{% endfor %}
+							{% endfor %}
+					</tbody>
+				</table>
+
+			</div>
+	</div> <!-- / .panel-body -->
+	<div class="panel-footer"><ul class="pagination">
+			{% for i in 1..page_count %}
+			<li {% if i == current %} class='active' {% endif %} ><a href="{{ current_url }}&p={{ i }}">{{ i }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+</div>{# empty Twig template #}

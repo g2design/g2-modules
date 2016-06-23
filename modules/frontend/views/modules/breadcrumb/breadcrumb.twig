@@ -1,0 +1,5 @@
+<ul>
+	{% for bread in params.urls %}
+		<li><a href="{{ bread.href }}">{{ bread.label }}</a></li>
+	{% endfor %}
+</ul>

@@ -1,0 +1,27 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h1>Permission: {{ permission.name | capitalize}}</h1>
+	</div>
+
+	<div class="panel-body">
+		<form action="" method="post">
+			<div class="row">
+				<label for="" class="col-md-2">Description</label>
+				<div class="form-group col-md-8">
+					<textarea name="description" id=""  class="form-control"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<label for="" class="col-md-2">Groups</label>
+				<div class="form-group col-md-8">
+					{% for group in allGroups %}
+					<label for="" class="checkbox-inline"><input type="checkbox" name="groups[{{group.id}}]" id="" {%if group.checked %}checked="checked"{% endif %} class="">
+						<span class="lbl">{{ group.name }}</span></label>
+					{% endfor %}
+				</div>
+			</div>
+			<button class="btn btn-primary">Save</button>
+
+		</form>
+	</div>
+</div>

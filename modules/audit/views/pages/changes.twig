@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="panel">
+		<div class="panel-heading">
+			<h3>Change List</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<tr>
+					<td><strong>User</strong></td>
+					<td>{{audit.user.name}}</td>
+				</tr>
+				<tr>
+					<td><strong>Message</strong></td>
+					<td>{{audit.message}}</td>
+				</tr>
+				<tr>
+					<td><strong>Date Changed</strong></td>
+					<td>{{ audit.date_logged }}</td>
+				</tr>
+			</table>
+		</div>
+		{{ update_form }}
+		<div class="panel-body">
+			<div class="col-md-6">
+
+				<table class="table table-warning table-responsive">
+					<thead>
+						<tr>
+							<th colspan="2" class="text-center">Old Data:</th>
+						</tr>
+						<tr>
+							<th>Field</th>
+							<th>Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for field, value in audit.old_obj %}
+						<tr>
+							<td>{{field}}</td>
+							<td>{{ value }}</td>
+						</tr>
+						{% endfor %}
+						<tr>
+							<td colspan="2">
+								<a href="{{constant('PACKAGE_URL')}}restore/old/{{audit.id}}" class="btn btn-warning">Restore</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<table class="table table-success table-responsive">
+					<thead>
+						<tr>
+							<th colspan="2" class="text-center">Changed To:</th>
+						</tr>
+						<tr>
+							<th>Field</th>
+							<th>Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for field, value in audit.new_obj %}
+						<tr>
+							<td>{{field}}</td>
+							<td>{{ value }}</td>
+						</tr>
+						{% endfor %}
+						<tr>
+							<td colspan="2">
+								<a href="{{constant('PACKAGE_URL')}}restore/new/{{audit.id}}" class="btn btn-warning">Restore</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

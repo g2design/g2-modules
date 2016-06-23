@@ -1,0 +1,26 @@
+{# empty Twig template #}
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h1>Permissions</h1>
+	</div>
+
+	<div class="panel-body">
+		<table class="table table-light">
+
+			<thead>
+				<tr>
+					<th></th>
+					<th>Permission Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for perm in permissions %}
+				<tr>
+					<td><a href="{{ constant('PACKAGE_URL')}}view/{{perm.id}}" class="btn-default btn">View Groups</a></td>
+					<td>{{ perm.name | capitalize }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>

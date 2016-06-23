@@ -1,0 +1,10 @@
+//
+// Themes / Dust / Pages
+// --------------------------------------------------
+
+// Sign In Page
+&.page-signin .signin-info {
+  background: $menu-color;
+  background: fade-out($menu-color, .2);
+}
+

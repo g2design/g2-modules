@@ -1,0 +1,5 @@
+{% for post in params.posts %}
+	{% for field, value in post %}
+		{{ field}}: {{value}}
+	{% endfor %}
+{% endfor %}

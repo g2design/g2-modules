@@ -1,0 +1,9 @@
+//
+// Themes / Frost / Pages
+// --------------------------------------------------
+
+// Sign In Page
+&.page-signin .signin-info {
+  background: $navbar-color;
+  background: fade-out($navbar-color, .2);
+}

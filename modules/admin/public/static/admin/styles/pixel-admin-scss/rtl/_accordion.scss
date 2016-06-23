@@ -1,0 +1,10 @@
+//
+// RTL: Accordions
+// --------------------------------------------------
+
+
+.accordion-toggle {
+  &:after {
+    float: left;
+  }
+}

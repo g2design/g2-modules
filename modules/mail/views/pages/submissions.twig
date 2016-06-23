@@ -1,0 +1,18 @@
+<table class="table">
+	<thead>
+		<tr>
+			{% for key,field in sub_head %}
+			<th>{{ key | capitalize }}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for sub in submissions %}
+		<tr>
+			{% for field in sub_head %}
+			<td>{{ field }}</tdh>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

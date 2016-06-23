@@ -1,0 +1,64 @@
+//
+// Accordion
+// --------------------------------------------------
+
+.panel-group .panel-heading {
+  padding: 0;
+}
+
+.accordion-toggle {
+  color: @text-color;
+  display: block;
+  line-height: 36px;
+  padding: 0 15px;
+
+  &:hover,
+  &.collapsed:hover {
+    background: rgba(0, 0, 0, .015);
+    color: @text-color;
+    text-decoration: none;
+    
+    &:after {
+      color: #888;
+    }
+  }
+
+  &:after {
+    color: #aaa;
+    content: "\f146";
+    display: block;
+    float: right;
+    font-family: FontAwesome;
+    font-size: 10px;
+    line-height: 36px;
+    position: relative;
+  }
+
+  &.collapsed {
+    color: #777;
+
+    &:after {
+      content: "\f0fe";
+    }
+  }
+}
+
+
+// Colors
+//
+
+.panel-group.panel-group-success {
+  .pixel-panel-group(@success-color);
+}
+
+.panel-group.panel-group-danger {
+  .pixel-panel-group(@danger-color);
+}
+
+.panel-group.panel-group-warning {
+  .pixel-panel-group(@warning-color);
+}
+
+.panel-group.panel-group-info {
+  .pixel-panel-group(@info-color);
+}

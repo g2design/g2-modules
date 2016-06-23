@@ -1,0 +1,10 @@
+//
+// Themes / Adminflare / Pages
+// --------------------------------------------------
+
+// Sign In Page
+&.page-signin .signin-info {
+  background: $primary-color;
+  background: fade-out($primary-color, .2);
+}
+

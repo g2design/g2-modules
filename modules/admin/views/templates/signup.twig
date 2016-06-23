@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+    <head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<base href="{{ base_url }}" />
+		<!-- Open Sans font from Google CDN -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin' rel='stylesheet' type='text/css'>
+
+		<!-- Pixel Admin's stylesheets -->
+		<link href="static/admin/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+		<!--[if lt IE 9]>
+			<script src="assets/javascripts/ie.min.js"></script>
+			<style>
+				#page-signin-bg{
+				  filter: none;
+				}
+			</style>
+		<![endif]-->
+
+		<script>var init = [];</script>
+
+		<!-- $DEMO =========================================================================================
+		
+			Remove this section on production
+		-->
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<script src="static/admin/assets/demo/demo.js"></script> 
+		<script src="static/js/bootstrap.min.js"></script>
+		<style>
+			#signin-demo {
+				position: fixed;
+				right: 0;
+				bottom: 0;
+				z-index: 10000;
+				background: rgba(0,0,0,.6);
+				padding: 6px;
+				border-radius: 3px;
+				display: none;
+			}
+			#signin-demo img { cursor: pointer; height: 40px; }
+			#signin-demo img:hover { opacity: .5; }
+			#signin-demo div {
+				color: #fff;
+				font-size: 10px;
+				font-weight: 600;
+				padding-bottom: 6px;
+			}
+			#page-signin-bg{
+				background: rgba(43,129,185,0.71);
+				background: -moz-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: -webkit-gradient(left top, right top, color-stop(0%, rgba(43,129,185,0.71)), color-stop(0%, rgba(241,111,92,0.71)), color-stop(0%, rgba(246,41,12,0.71)), color-stop(0%, rgba(240,47,23,0.71)), color-stop(0%, rgba(43,129,185,0.71)), color-stop(100%, rgba(43,129,185,0.71)));
+				background: -webkit-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: -o-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: -ms-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: linear-gradient(to right, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b81b9', endColorstr='#2b81b9', GradientType=1 );
+			}
+
+		</style>
+		<script>
+			init.push(function () {
+				var $div = $('<div id="signin-demo"><div>PAGE BACKGROUND</div></div>'),
+						bgs = ['static/admin/assets/demo/signin-bg-1.jpg', 'static/admin/assets/demo/signin-bg-2.jpg', 'static/admin/assets/demo/signin-bg-3.jpg',
+							'static/admin/assets/demo/signin-bg-4.jpg', 'static/admin/assets/demo/signin-bg-5.jpg', 'static/admin/assets/demo/signin-bg-6.jpg',
+							'static/admin/assets/demo/signin-bg-7.jpg', 'static/admin/assets/demo/signin-bg-8.jpg', 'static/admin/assets/demo/signin-bg-9.jpg'];
+				for (var i = 0, l = bgs.length; i < l; i++)
+					$div.append($('<img src="' + bgs[i] + '">'));
+				$div.find('img').click(function () {
+					var img = new Image();
+					img.onload = function () {
+						$('#page-signin-bg > img').attr('src', img.src);
+						$(window).resize();
+					}
+					img.src = $(this).attr('src');
+				});
+				$('body').append($div);
+			});
+		</script>
+		<!-- / $DEMO -->
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+		<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="static/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+		<link rel="static/admin/stylesheet" href="css/style.css">
+    </head>
+    <body class="theme-default page-signin ">
+		<div class="container-fluid">
+			{{ content }}
+		</div>
+
+
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{
+	
+	"name": "g2design/g2-modules",
+	"require": {
+		"stwessl/form": "dev-master",
+		"g2design/framework-git": "dev-master"
+	},
+	
+	"autoload": {
+       "files": [
+			"load.php"
+		]
+    },
+	
+	"extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+
+}

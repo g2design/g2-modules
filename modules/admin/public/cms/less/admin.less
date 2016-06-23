@@ -1,0 +1,126 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 27, 2015, 10:37:10 AM
+    Author     : Sile
+*/
+
+
+/*select theme color*/
+@default: #2B81B9;
+@asphalt: #3BC2A9;
+@purple_hills: #A48AD4;
+@adminflare: #75C6F3;
+@dust: #F65D35;
+@frost: #1AAADA;
+@fresh: #9AC83E;
+@silver: #F0F0F0;
+@clean: #3D4A5D;
+@white: #EEEEEE;
+
+
+/*Select theme second color Page Background*/
+@default2: #23272D;
+@asphalt2: #515151;
+@purple_hills2: #3C3E49;
+@adminflare2: #2b2b2b url("../static/admin/images/themes/adminflare/menu-bg.png");
+@dust2: #433D3C;
+@frost2: #2A2D33;
+@fresh2: #43474B;
+@silver2: #333333;
+@clean2: #EDF0F1;
+@white2: #FFFFFF;
+
+/*Select theme third color for Top Banner*/
+@default3: #181B1F;
+@asphalt3: #444444;
+@purple_hills3: #30323B;
+@adminflare3: #262626 url("../static/admin/images/themes/adminflare/menu-bg.png");
+@dust3: #363130;
+@frost3: #1E2125;
+@fresh3: #78BDD1;
+@silver3: #64BED8;
+@clean3: #FAFAFA;
+@white3: #F6F6F6;
+
+/*Select font color*/
+@white: #fff;
+@dark: #333;
+
+.button-show{
+	position: absolute;
+	top: 0;
+	left: 1px;
+	cursor: pointer;
+	color: steelblue;
+}
+.show{
+	display: block;
+}
+.mvc-admin-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1031;
+	.t-center{
+		height: 100%;
+		width: 100%;
+		display: table;
+		position: inherit;
+		z-index:-1;
+		.v-center{
+			height: 100%;
+			display: table-cell;
+			vertical-align: middle;
+			.grad{
+				background: rgba(000,000,000,0.5);
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+		}
+	}
+	.top-bar{
+		padding: 15px;
+		padding-left: 50px;
+		background: @default3;
+	}
+	.toggle {
+		display: none;
+	}
+	.panel {
+		background: @default2;
+		padding: 15px 100px;
+		h4, label{
+			color: @white;
+		}
+		label{
+			margin: 15px 0;
+			font-weight: 500;
+		}
+		.form-control{
+			background-color: #fefefe;
+		}
+		.form-control:first-child{
+			font-weight: 600;
+		}
+	}
+	.btn-success,.btn-success.active, .btn-success.focus,
+	.btn-success:active, .btn-success:focus, .btn-success:hover,
+		.open>.dropdown-toggle.btn-success{
+		background-color: @default;
+		border-color: @default;
+	}
+	.btn-warning{
+		background-color: @default;
+		border-color: @default;
+	}
+
+}

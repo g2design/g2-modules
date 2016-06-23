@@ -1,0 +1,28 @@
+<div class="panel col-md-6 col-md-offset-3">
+	<div class="panel-heading">
+		<h2>Editing Page</h2>
+		<p>
+			{{ page.title }} <br>
+			<a href="{{constant('BASE_URL')}}{{page.slug}}" target="_blank">View Page</a>
+		</p>
+	</div>
+	<form action="" method="post" enctype="multipart/form-data">
+		<div class="panel-body">
+			{% for area in areas %}
+				<div class="form-group">
+					<label for="" class="">{{ area.area_name }}</label>
+					{{ area.get_form_field() }}
+				</div>
+				{#{% if area.type == 'wysiwig' %}
+					<textarea name="{{area.id}}" id=""  class="editor form-control">{{area.html}}</textarea>
+				{% else %}
+					<input class="form-control" type="text" name="{{area.id}}" value="{{ area.html }}">
+				{% endif %}#}
+			{% endfor %}
+		</div>
+		
+		<div class="panel-footer">
+			<button type="submit" class="btn btn-default">Save</button>
+		</div>
+	</form>
+</div>

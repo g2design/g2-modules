@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+    <head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>{{ meta_title }}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<base href="{{ base_url }}">
+		<!-- Open Sans font from Google CDN -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin' rel='stylesheet' type='text/css'>
+
+		<!-- Pixel Admin's stylesheets -->
+		<link href="static/admin/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+		<link href="static/admin/assets/stylesheets/summernote.min.js" rel="stylesheet" >
+
+		<!--[if lt IE 9]>
+			<script src="assets/javascripts/ie.min.js"></script>
+			<style>
+				#page-signin-bg{
+				  filter: none;
+				}
+			</style>
+		<![endif]-->
+
+		<script>var init = [];</script>
+		<!-- Get jQuery from Google CDN -->
+		<!--[if !IE]> -->
+		<script type="text/javascript"> window.jQuery || document.write("<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'>" + "<" + "/script>");</script>
+		<!-- <![endif]-->
+		<!--[if lte IE 9]>
+			<script type="text/javascript"> window.jQuery || document.write("<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'>"+"<"+"/script>"); </script>
+		<![endif]-->
+
+		<!-- include codemirror (codemirror.css, codemirror.js, xml.js, formatting.js) -->
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css" />
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+
+		<script src="static/js/jquery.numeric.js"></script>
+		<script src="static/admin/javascripts/summernote.min.js"></script>
+		<script src="static/admin/javascripts/scripts.js"></script>
+
+		<style>
+			.field_error {
+				background: #ffcccc;
+			}
+			#page-signin-bg{
+				background: rgba(43,129,185,0.71);
+				background: -moz-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: -webkit-gradient(left top, right top, color-stop(0%, rgba(43,129,185,0.71)), color-stop(0%, rgba(241,111,92,0.71)), color-stop(0%, rgba(246,41,12,0.71)), color-stop(0%, rgba(240,47,23,0.71)), color-stop(0%, rgba(43,129,185,0.71)), color-stop(100%, rgba(43,129,185,0.71)));
+				background: -webkit-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: -o-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: -ms-linear-gradient(left, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				background: linear-gradient(to right, rgba(43,129,185,0.71) 0%, rgba(241,111,92,0.71) 0%, rgba(246,41,12,0.71) 0%, rgba(240,47,23,0.71) 0%, rgba(43,129,185,0.71) 0%, rgba(43,129,185,0.71) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b81b9', endColorstr='#2b81b9', GradientType=1 );
+			}
+		</style>
+    </head>
+    <body class="theme-default Animate main menu hidden-md">
+		<!-- Demo script --> <script src="static/admin/assets/demo/demo.js"></script> <!-- / Demo script -->
+		<div id="main-wrapper">
+
+			<!-- 2. $MAIN_NAVIGATION ===========================================================================
+
+				Main navigation
+			-->
+			<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+				<!-- Main menu toggle -->
+				<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+
+				<div class="navbar-inner">
+					<!-- Main navbar header -->
+					<div class="navbar-header">
+
+						<!-- Logo -->
+						<a href="{{ admin_url }}" class="navbar-brand">
+							<div><img alt="Pixel Admin" src="static/admin/assets/images/pixel-admin/main-navbar-logo.png"></div>Admin
+						</a>
+
+						<!-- Main navbar toggle -->
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
+
+					</div> <!-- / .navbar-header -->
+
+					<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+						<div>
+							<div class="right clearfix">
+								<ul class="nav navbar-nav pull-right right-navbar-nav">
+
+									<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+
+									<li>
+										{#<form class="navbar-form pull-left">
+											<input type="text" class="form-control" placeholder="Search">
+										</form>#}
+									</li>
+
+									<li class="dropdown">
+										{#<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+											<img src="static/admin/assets/images/pixel-admin/main-navbar-logo.png" alt="">
+											<span>Admin</span>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="#">Profile <span class="label label-warning pull-right">new</span></a></li>
+											<li><a href="#">Account <span class="badge badge-primary pull-right">new</span></a></li>
+											<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+											<li class="divider"></li>
+											<li><a href="{{ admin_url }}logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+										</ul>#}
+									</li>
+								</ul> <!-- / .navbar-nav -->
+							</div> <!-- / .right -->
+						</div>
+					</div> <!-- / #main-navbar-collapse -->
+				</div> <!-- / .navbar-inner -->
+			</div> <!-- / #main-navbar -->
+			<!-- /2. $END_MAIN_NAVIGATION -->
+
+
+			<div id="main-menu" role="navigation">
+				<div id="main-menu-inner">
+					<div class="menu-content top" id="menu-content-demo">
+						<!-- Menu custom content demo
+							 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+							 Javascript: html/assets/demo/demo.js
+						-->
+						<div>
+							<div class="text-bg"><span class="text-slim">{#Welcome,#}</span> <span class="text-semibold">{{ user.username | capitalize }}</span></div>
+
+							<img src="static/admin/assets/images/pixel-admin/main-navbar-logo.png" alt="" class="">
+							<div class="btn-group">
+								{#<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></button></a>
+								<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></button></a>
+								<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></button></a>#}
+								<a href="{{ admin_url }}logout" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></button></a>
+							</div>
+							<a href="#" class="close">&times;</a>
+						</div>
+					</div>
+					<ul class="navigation">
+						{% for package in packages %}
+							<li class="active">
+								<a href="{{ package.link }}"><i class="menu-icon fa fa-bars"></i><span class="mm-text">{{ package.name | capitalize }}</span></a>
+							</li>
+						{% endfor %}
+
+					</ul> <!-- / .navigation -->
+				</div> <!-- / #main-menu-inner -->
+			</div> <!-- / #main-menu -->
+			<!-- /4. $MAIN_MENU -->
+
+			<div id="content-wrapper">
+				{{ alert.render() }}
+				{{ breadcrumb }}
+				{{ content }}
+			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg"></div>
+		</div> <!-- / #main-wrapper -->
+
+
+
+
+		<!-- Pixel Admin's javascripts -->
+		<script src="static/admin/assets/javascripts/bootstrap.min.js"></script>
+		<script src="static/admin/assets/javascripts/pixel-admin.min.js"></script>
+
+		<script type="text/javascript">
+			init.push(function () {
+				// Javascript code here
+			})
+			window.PixelAdmin.start(init);
+		</script>
+
+    </body>
+</html>

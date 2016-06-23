@@ -1,0 +1,88 @@
+{# empty Twig template #}
+<div class="mvc-admin-bar">
+	<div class="button-show glyphicon glyphicon-th-large"></div>
+	<div class="container-fluid top-bar">
+		<button data-toggle="create-page" class="btn btn-success">
+			Create Page
+		</button>
+		<button data-toggle="edit-page" class="btn btn-success">
+			Edit This page details
+		</button>
+	</div>
+	<div class="t-center">
+		<div class="v-center">
+			<div class="create-page toggle container panel">
+				<div class="grad"></div>
+				<h4>Create Page</h4>
+				<form action="crud/page-crud" method="POST">
+					<div class="form-group">
+						<label for="" class="">Template:</label>
+						<select name="template" id="" class="form-control">
+
+							{% for template in this.get_templates() %}
+								<option value="{{ template }}">{{ template }}</option>
+							{% endfor %}
+						</select>
+
+						<label for="">Layout:</label>
+						<select name="layout" class="form-control">
+							{%for lay in this.get_layouts() %}
+								<option value="{{lay.file}}"> {{lay.file}} </option>
+							{% endfor %}
+						</select>
+						<label for="">Page Slug (url)</label>
+						<input type="text" class="form-control" name="slug" >
+						<h4>Page Meta</h4>
+						<label for="">Page Title</label>
+						<input type="text" class="form-control" name="title">
+						<label for="">Page Description</label>
+						<textarea name="description" id="" class="form-control"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">
+							Create Page
+						</button>
+						<button class="btn btn-warning btn-cancel" type="reset">Cancel</button>
+					</div>
+
+				</form>
+			</div>
+			<div class="edit-page toggle container panel">
+				<div class="grad"></div>
+				<h4>Edit Page</h4>
+				<form action="crud/page-crud" method="POST">
+					<div class="form-group">
+						<input type="hidden" name="page_id" value="{{ page_id }}">
+						<label for="" class="">Template:</label>
+						<select name="template" id="" class="form-control">
+							{% for template in this.get_templates() %}
+								<option value="{{ template }}" {% if page.template == template %}selected="selected"{% endif %} >{{ template }}</option>
+							{% endfor %}
+						</select>
+
+						<label for="">Layout:</label>
+						<select name="layout" class="form-control">
+							{%for lay in this.get_layouts() %}
+								<option value="{{lay.file}}" {% if page.layout == lay.file %}selected="selected"{% endif %} > {{lay.file}} </option>
+							{% endfor %}
+						</select>
+						<label for="">Page Slug (url)</label>
+						<input type="text" class="form-control" name="slug" value="{{page.slug }}" >
+						<h4>Page Meta</h4>
+						<label for="">Page Title</label>
+						<input type="text" class="form-control" name="title" value="{{page.title}}">
+						<label for="">Page Description</label>
+						<textarea name="description" id="" class="form-control">{{page.description}}</textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">
+							Save Details
+						</button>
+						<button class="btn btn-warning btn-cancel" type="reset">Cancel</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

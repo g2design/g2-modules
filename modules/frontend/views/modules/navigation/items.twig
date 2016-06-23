@@ -1,0 +1,12 @@
+{% for nav in params.navitems %}
+	<li>
+		<a href="{{ nav.href }}" title="{{ nav.title }}" >{{ nav.label }}</a>
+		{% if nav.sub_navs %}
+			<ul>
+				{% for sub in nav.sub_navs %}
+					<li><a href="{{ sub.href }}" title="{{ nav.title }}" >{{ sub.label }}</a></li>
+					{% endfor %}
+			</ul>
+		{% endif %}
+	</li>
+{% endfor %}

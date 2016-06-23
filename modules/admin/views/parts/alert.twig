@@ -1,0 +1,6 @@
+{% for alert in messages %}
+<div class="alert {{ alert.code }} alert-dark">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+	{{ alert.message }}
+</div>
+{% endfor %}

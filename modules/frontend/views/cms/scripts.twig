@@ -1,0 +1,104 @@
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+{#<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>#}
+
+{% if this.logged_in %}
+{#	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">#}
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css" />
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.min.js"></script>
+
+
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.6.0/summernote.min.js"></script>
+
+
+
+
+	{% include 'cms/adminbar.twig' %}
+	<link rel="stylesheet/less" type="text/css" href="cms/less/admin.less" >
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.4.0/less.min.js"></script>
+	<script src="cms/js/admin.js"></script>
+	<div style="display:none">
+		<div class="edit-area">
+			<button class="mv-save" contenteditable="false">Save</button>
+			<button class="mv-edit" contenteditable="false">Edit</button>
+		</div>
+	</div>
+	<script>
+		$(function () {
+			console.log('Edit button initialising');
+			$('[data-contenteditable]').each(function (e) {
+				var button = $('.edit-area').first().clone().appendTo($(this));
+				console.log("ASAS" + $(this).data('area'));
+				button.attr('data-areatarget', $(this).data('area'));
+				button.parents('a').click(function(e){
+					e.preventDefault();
+				})
+				var _this = $(this);
+				button.find('.mv-edit').click(function (e) {
+					_this.attr('contenteditable', 'true');
+					_this.focus();
+					button.insertAfter(_this);
+					button.find('.mv-edit').hide();
+					button.find('.mv-save').show();
+					if (_this.data('type') == 'wysiwig') {
+						_this.summernote({
+							codemirror: {// codemirror options
+								theme: 'monokai'
+							},
+							airMode: false
+						});
+					}
+					_this.change(function () {
+						console.log($(this).html());
+					});
+				});
+				button.find('.mv-save').click(function () {
+					console.log('Saving');
+					var area = $(this).parent().data('areatarget');
+					var btn_area = $(this).parent();
+					var clone = $('[data-area="' + area + '"]');
+					console.log(clone.code());
+					$(this).parent().find('.edit-area').remove();
+
+					$.post('ajax/save-area', {'content': clone.code(), 'area_id': area}, function () {
+						clone.destroy();
+						btn_area.find('.mv-edit').show();
+						btn_area.find('.mv-save').hide();
+						btn_area.appendTo(clone);
+					});
+
+					_this.removeAttr('contenteditable');
+				});
+			});
+		});
+	</script>
+	<style>
+		[data-contenteditable] .edit-area button {
+			display: none;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+		[data-contenteditable] {
+			position: relative;
+		}
+		[data-contenteditable]:hover .edit-area .mv-edit {
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+		[contenteditable] .edit-area .mv-edit {
+			display: none !important;
+		}
+		[contenteditable="true"] .edit-area .mv-save {
+			display: block;
+		}
+
+	</style>
+{% endif %}
