@@ -1,2 +1,2 @@
 <?php
-Mvc_Router::get_instance()->register_package_directory(__DIR__ . '/modules');
+MVC_Router::getInstance()->register_package_directory(__DIR__ . '/modules');
