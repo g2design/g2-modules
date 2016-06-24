@@ -7,6 +7,7 @@ class Theme_Loader extends Mvc_Singleton {
 	var $twig = null, $page = null, $theme = null, $pre_content = null, $meta;
 	var $logged_in = false;
 	var $loader = false;
+	static $params = [];
 
 	/**
 	 * Functions prepares the twig enviroment
@@ -93,7 +94,7 @@ class Theme_Loader extends Mvc_Singleton {
 		$this->page->logged_in = $this->logged_in;
 		$layout = $this->load_layout($layout, $this->theme);
 
-		$content = $this->twig->render($layout->file, ['this' => &$this, 'layout_id' => $layout->getID()]);
+		$content = $this->twig->render($layout->file, array_merge( self::$params ,['this' => &$this, 'layout_id' => $layout->getID()]));
 
 		//Rather attach scripts and css here then in the template
 		$c = Wa72\HtmlPageDom\HtmlPageCrawler::create($content);
@@ -160,11 +161,11 @@ class Theme_Loader extends Mvc_Singleton {
 	}
 
 	function render_file($file, $params = []) {
-		return $this->twig->render($file, $params);
+		return $this->twig->render($file, array_merge($params, self::$params));
 	}
 
 	function load_layout($file, $theme) {
-		$layout = current(R::findOrDispense('layout', 'file = :file AND theme =:theme', ['file' => $file, 'theme' => $theme]));
+		$layout = current(R::findOrDispense('layout', 'file = :file AND theme =:theme', array_merge(self::$params,['file' => $file, 'theme' => $theme])));
 		if (!$layout->getID()) {
 			$layout->file = $file;
 			$layout->theme = $theme;

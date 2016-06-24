@@ -3,11 +3,16 @@
 class Theme_Page extends Mvc_Base {
 	private $data = null, $twig = null;
 	var $logged_in = false, $id = null;
+	static $params = [];
 	
 	function __construct($slug,  Twig_Environment &$twig) {
 		$this->data = $this->load_data($slug);
 		$this->id = $this->data->getID();
 		$this->twig = $twig;
+	}
+	
+	static function &attach_object($name, $value) {
+		self::$params[$name] = &$value;
 	}
 	
 	function get($name){
@@ -25,7 +30,7 @@ class Theme_Page extends Mvc_Base {
 	function content(){
 		//Load the template
 //		echo $this->data->template;
-		$content = $this->twig->render($this->data->template, ['this'=> $this]);
+		$content = $this->twig->render($this->data->template, array_merge(self::$params,['this'=> $this]));
 		$processor = new Theme_Process($this);
 		$processor->logged_in = $this->logged_in;
 		
