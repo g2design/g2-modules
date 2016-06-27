@@ -2,6 +2,8 @@
 	
 	"name": "g2design/g2-modules",
 	"require": {
+		"leafo/lessphp": "0.4.0",
+		"leafo/scssphp": "0.1.7",
 		"stwessl/form": "dev-master",
 		"g2design/framework-git": "dev-master"
 	},
