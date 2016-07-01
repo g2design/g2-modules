@@ -11,18 +11,22 @@ class Queuer extends Mvc_Base {
 
 		$serializer = new Serializer();
 		$s_closure = $serializer->serialize($function);
-		
 		$callable = R::dispense('queueitem');
 		
-		$calleble->function = $s_closure;
-		$calleble->added_at = time();
+		$callable->callser = $s_closure;
+		$callable->added_at = time();
 		$callable->note = $note;
+		$callable->status = 'open';
 		
 		R::store($callable);
 	}
 	
 	static function execute($number = 5) {
-		$callables = R::findAll('queueitem','ORDER BY id DESC',['num' => $number]);
+		if(!is_numeric($number) ) {
+			throw new Exception( 'Number must be numeric' );
+		}
+		
+		$callables = R::findAll('queueitem','status = "open" ORDER BY id DESC LIMIT '. $number);
 		$c=0;
 		foreach (array_values($callables) as $index => $calleble) {$c++;
 			if($calleble->done) {
@@ -33,10 +37,15 @@ class Queuer extends Mvc_Base {
 				break;
 			}
 			$serializer = new Serializer();
-			$closure = $serializer->unserialize($calleble->function);
+			$closure = $serializer->unserialize($calleble->callser);
+			
+////			$calleble->status = 'busy';
+//			R::store($calleble);
 			
 			$closure();
+		
 			
+			$calleble->status = 'done';
 			$calleble->done = true;
 			$calleble->doneat = time();
 			
