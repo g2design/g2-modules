@@ -1,0 +1,23 @@
+<div class="panel">
+	<div class="panel-heading"><h1>{{ this.title }}</h1>
+		<div class="col-md-12">
+			{% for a in this.alerts %}
+				<div class="alert {{ a.class}}">{{ a.message }}</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% if this.functions %}
+		<div class="panel-heading">
+			{% for f in this.functions %}
+				<a href="{{ f.action }}" class="btn btn-default">{{ f.label }}</a>
+			{% endfor %}
+
+		</div>
+	{% endif %}
+	<div class="panel-body">
+		{% for c in this.content %}
+			{{ c }}
+		{% endfor %}
+	</div>
+
+</div>
