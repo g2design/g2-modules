@@ -1,23 +1,24 @@
 {
-	
 	"name": "g2design/g2-modules",
 	"require": {
 		"leafo/lessphp": "0.4.0",
 		"leafo/scssphp": "0.1.7",
 		"stwessl/form": "dev-master",
-		"g2design/framework-git": "dev-master"
+		"g2design/framework-git": "dev-master",
+		"wa72/htmlpagedom": "~1.0",
+		"imagine/imagine": "~0.5.0",
+		"jeremeamia/superclosure": "^2.0",
+		"symfony/http-foundation": "3.1.0"
 	},
-	
 	"autoload": {
-       "files": [
+		"files": [
 			"load.php"
 		]
-    },
-	
+	},
 	"extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    }
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
 
 }
