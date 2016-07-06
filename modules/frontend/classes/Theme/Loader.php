@@ -101,7 +101,7 @@ class Theme_Loader extends Mvc_Singleton {
 		if (G()->logged_in()) {
 			$this->attach_admin($c);
 		}
-		$this->replace_cdn_script_tags($c);
+//		$this->replace_cdn_script_tags($c);
 		$content = $c->saveHTML();
 
 
