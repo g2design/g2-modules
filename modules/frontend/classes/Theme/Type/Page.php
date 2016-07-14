@@ -17,7 +17,6 @@ class Theme_Type_Page extends Theme_Type {
 			return false;
 		}
 		$page = current(R::findOrDispense('page', 'gen_filename = :file', ['file' => $filename])); /* @var $page \RedBeanPHP\OODBBean */
-
 		/**
 		 * Creates the page database object
 		 */
@@ -27,6 +26,7 @@ class Theme_Type_Page extends Theme_Type {
 			$page->description = $config->page->description;
 		} else {
 			
+			$old_slug = $page->slug;
 			$meta = new Meta_Generator($meta_config);
 			$page->title = !empty($config->page->title) ? $config->page->title : $meta->get_title($page->slug);
 			$page->description = !empty($config->page->description) ? $config->page->description :  $meta->get_description($page->slug);
@@ -63,7 +63,11 @@ class Theme_Type_Page extends Theme_Type {
 			}
 		};
 		
+		
 		$route = new Router();
+		if(isset($old_slug)) {
+			$route->delete_route($old_slug); 
+		}
 		$route->create_route($page->slug, $r_func);
 	}
 	

@@ -281,6 +281,10 @@ class Theme_Loader extends Mvc_Singleton {
 		$cache = $this->get_cache_object();
 		$cache->remove($id);
 	}
+	
+	public function get_routes(){
+		return R::findAll('route');
+	}
 
 	public function create_pages() {
 		//Load Page files
@@ -301,6 +305,7 @@ class Theme_Loader extends Mvc_Singleton {
 
 				R::store($file_mod_time);
 			} else {
+				
 //				debug($file . ' === ' . filemtime($file) . ' ' . $file_mod_time->last_modified);
 				if (filemtime($file) > $file_mod_time->last_modified) {
 					$file_mod_time->last_modified = filemtime($file);

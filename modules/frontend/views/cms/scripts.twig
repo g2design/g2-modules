@@ -5,7 +5,7 @@
 {#<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>#}
 
 {% if this.logged_in %}
-{#	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">#}
+	{#	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">#}
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.css" />
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.min.css" />
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.min.js"></script>
@@ -27,6 +27,19 @@
 			<button class="mv-save" contenteditable="false">Save</button>
 			<button class="mv-edit" contenteditable="false">Edit</button>
 		</div>
+
+		<div class="link-editor-panel">
+			<div class="inputs">
+				<input type='text' name='label'>
+				<select name="" id="">
+					{% for route in this.get_routes() %}
+						<option value="{{ route.slug }}">{{route.slug}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<button class='show-inputs'>Edit</button>
+			<button class="edit-link">Save</button>
+		</div>
 	</div>
 	<script>
 		$(function () {
@@ -35,7 +48,7 @@
 				var button = $('.edit-area').first().clone().appendTo($(this));
 				console.log("ASAS" + $(this).data('area'));
 				button.attr('data-areatarget', $(this).data('area'));
-				button.parents('a').click(function(e){
+				button.parents('a').click(function (e) {
 					e.preventDefault();
 				})
 				var _this = $(this);
@@ -59,25 +72,70 @@
 				});
 				button.find('.mv-save').click(function () {
 					console.log('Saving');
+					_this.removeAttr('contenteditable');
 					var area = $(this).parent().data('areatarget');
 					var btn_area = $(this).parent();
+					$('[data-area="' + area + '"]').attr('contenteditable', 'false');
 					var clone = $('[data-area="' + area + '"]');
-					console.log(clone.code());
+					console.log(clone.wrap('<p/>').parent().code());
 					$(this).parent().find('.edit-area').remove();
 
-					$.post('ajax/save-area', {'content': clone.code(), 'area_id': area}, function () {
+					$.post('ajax/save-area', {'content': clone.wrap('<p/>').parent().code(), 'area_id': area}, function () {
 						clone.destroy();
 						btn_area.find('.mv-edit').show();
 						btn_area.find('.mv-save').hide();
 						btn_area.appendTo(clone);
 					});
 
-					_this.removeAttr('contenteditable');
 				});
+			});
+
+			$('.link-editor').each(function () {
+				var _this = $(this);
+				var area = _this.data('area');
+				var clabel = _this.code();
+				$(this).click(function (e) {
+					e.preventDefault()
+				});
+				var panel = $('.link-editor-panel').first().clone().appendTo($(this));
+				panel.find('input').val(clabel);
+				var inputs = panel.find('.inputs');
+				inputs.find('select').val(_this.attr('href'));
+				panel.find('.show-inputs').click(function () {
+					inputs.toggle();
+					$(this).parent().toggleClass('expanded');
+
+				});
+
+				_this.find('.edit-link').click(function () {
+					//edit the existing a and add details to it
+					var label = inputs.find('input').val();
+					var link = inputs.find('select option:selected').text();
+					_this.find('.link-editor-panel').remove();
+					_this.attr( 'href', link );
+					_this.text(label);
+					var clone = _this.clone();
+					
+					var content = clone.wrap('<p/>').parent().code();
+					
+					//Clone a and send to save ajax
+					$.post('ajax/save-area', {'content': content, 'area_id': area}, function () {
+						clone.destroy();
+					});
+					
+				});
+				
 			});
 		});
 	</script>
 	<style>
+		button {
+			background: black;
+			font-size: 10px;
+			border: none;
+			color: white;
+			display: inline-block;
+		}
 		[data-contenteditable] .edit-area button {
 			display: none;
 			position: absolute;
@@ -99,6 +157,31 @@
 		[contenteditable="true"] .edit-area .mv-save {
 			display: block;
 		}
+
+		.link-editor {
+			position: relative;
+		}
+		.link-editor button {
+			display: none;
+		}
+		.link-editor:hover button {
+			display: inline-block;
+		}
+		.link-editor-panel {
+			position: absolute;
+			top: 0%;
+			right: 0;
+		}
+
+		.link-editor-panel .inputs {
+			display: none;
+		}
+
+
+		.link-editor-panel .inputs select {
+			width: 100%;
+		}
+
 
 	</style>
 {% endif %}

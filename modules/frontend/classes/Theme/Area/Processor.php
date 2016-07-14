@@ -2,7 +2,8 @@
 
 class Theme_Area_Processor extends Mvc_Base {
 	private $area = null;
-	
+	private $editable;
+
 	function __construct(&$area) {
 		$this->area = $area;
 	}
@@ -18,7 +19,9 @@ class Theme_Area_Processor extends Mvc_Base {
 	function render(){
 		//Check if a class is defined for a type
 		$area = $this->get_area_instance();
-		
+		if($this->editable) {
+			$area->editable = true;
+		}
 		return $area->render();
 	}
 	
@@ -68,6 +71,10 @@ class Theme_Area_Processor extends Mvc_Base {
 	function validate(){
 		$instance = $this->get_area_instance();
 		return $instance->validate();
+	}
+	
+	function editable() {
+		$this->editable = true;
 	}
 }
 

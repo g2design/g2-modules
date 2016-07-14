@@ -29,6 +29,12 @@ class Router {
 		R::store($route);
 		// Store
 	}
+	
+	function delete_route($slug) {
+		$route = $this->load_route($slug);
+		
+		R::trash($route);
+	}
 
 	function routable($slug) {
 		//Check if a route is stored for given slug

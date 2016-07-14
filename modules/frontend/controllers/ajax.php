@@ -13,6 +13,9 @@ class Ajax_Mvc_Controller extends Mvc_Controller {
 			$area_id = $_POST['area_id'];
 
 			$area = R::findOne('area', 'id = :area', ['area' => $area_id]);
+			
+			
+			
 			$old = clone $area;
 			$area->html = $content;
 

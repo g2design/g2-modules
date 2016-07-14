@@ -23,6 +23,9 @@ class Theme_Process extends Mvc_Base {
 
 		foreach ($beans as $area) {
 			$cp = new Theme_Area_Processor($area);
+			if ($this->logged_in) {
+				$cp->editable();
+			}
 			$content = $cp->render();
 			//Find the nodes matching this areas ids
 			$node = $c->filter('[mvc-edit="' . $area->area_name . '"]');
@@ -33,9 +36,9 @@ class Theme_Process extends Mvc_Base {
 				$node->setInnerHtml($content);
 			}
 			if ($this->logged_in) {
-				$node->setAttribute('data-contenteditable', 'true');
-				$node->setAttribute('data-area', $area->getID());
-				$node->setAttribute('data-type', $area->type);
+//				$node->setAttribute('data-contenteditable', 'true');
+//				$node->setAttribute('data-area', $area->getID());
+//				$node->setAttribute('data-type', $area->type);
 			} else {
 				$node->removeAttribute('mvc-type');
 			}
@@ -61,7 +64,23 @@ class Theme_Process extends Mvc_Base {
 
 			return $instance->load_area($instance->page->id, $field_name, $field_type, $starting_html);
 		});
-
+		
+		// Delete all areas that are not relevant but connected to this page
+		$areas = R::findAll('area','page_id = :page',['page' => $this->page->id]);
+		$not_loaded = [];
+		foreach($areas as $area) {
+			$bid = $area->id;
+			foreach($area_beans as $area_b) {
+				if($area_b->id == $bid) {
+					$found = true;
+					break;
+				}
+			}
+			if(!$found) $not_loaded[] = $area;
+		}
+		
+		R::trashAll($not_loaded);
+		
 		// Convert these nodes to area beens
 //		$area_beans = $this->nodes_to_beans($nodes);
 		return $area_beans;
